@@ -26,24 +26,27 @@ function Login({setValid, setRol}) {
     };
     const submitHandler = (e) => {
         if (e && "preventDefault" in e) e.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": '*'},
-            body: JSON.stringify({'name': login['name'], 'password':login['password']})
-        };
-        fetch('/api/login', requestOptions)
-        .then( res => {
-            if (res.ok){
-                setValid(true)
-                setRol(res.text)
-                navigate('/');
-            }
-            throw res
-        }).catch(error => {
-            if (error.status === 401){
-                setSnack("Usuario o contraseña incorrecto")
-            }
-        })
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": '*'},
+        //     body: JSON.stringify({'name': login['name'], 'password':login['password']})
+        // };
+        // fetch('/api/login', requestOptions)
+        // .then( res => {
+        //     if (res.ok){
+        //         return res.json()
+        //     }
+        //     throw res
+        // }).then(data => {
+            localStorage.setItem('valid', true)
+            // localStorage.setItem('rol', JSON.stringify(data.text))
+            localStorage.setItem('rol', 'admin')
+            navigate('/');
+        // }).catch(error => {
+        //     if (error.status === 401){
+        //         setSnack("Usuario o contraseña incorrecto")
+        //     }
+        // })
     }
     
     const [snack, setSnack] = React.useState(false);

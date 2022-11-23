@@ -3,8 +3,6 @@ import { useState, useEffect } from "react"
 
 function Util() {
     // const [loading, setLoading] = useState(false);
-    const [valid, setValid] = useState(true);
-    const [rol, setRol] = useState('admin');
     const [hoteles, setHoteles] = useState([]);
 
     const getHoteles = async (data={}) => {
@@ -41,10 +39,6 @@ function Util() {
         getHoteles,
         setHoteles,
         hoteles,
-        valid,
-        setValid,
-        rol,
-        setRol
     }
 }
 export { Util }

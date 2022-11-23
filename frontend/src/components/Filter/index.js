@@ -3,6 +3,34 @@ import Rating from '@mui/material/Rating';
 import HotelImg from "./hotel.jpg";
 // poner host/image.png y en la api pooner la imagenes en /public
 function Filter() {
+    const [filtros, setFiltros] = {name: "", nroHabitaciones: 0, ciudad: "", clasificacion: 0}
+
+    const updateState = (e) => {
+      setNewHotel({
+          [e.target.name]:e.target.value,
+      });
+    }
+
+    const submitHandler = (e) => {
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": '*'},
+      };
+      fetch('/api/login', requestOptions)
+      .then( res => {
+          if (res.ok){
+            return res.json()
+          }
+          throw res
+      }).then(data => {
+        
+      }).catch(error => {
+        alert("Ocurrio un error al enviar los datos")
+      })
+    }
+
+
+
     return(
       <div className="flex h-screen justify-center items-center" style={{ backgroundImage: `url(${HotelImg})`, backgroundRepeat:"no-repeat" }}>
       <form className="w-2/5 py-5 m-auto px-5 bg-white shadow rounded-md">

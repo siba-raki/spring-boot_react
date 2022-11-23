@@ -21,9 +21,11 @@ function HoteleForm() {
     fetch('/api/login', requestOptions)
     .then( res => {
         if (res.ok){
-          // get all?
+          return res.json()
         }
         throw res
+    }).then(data => {
+      
     }).catch(error => {
       alert("Ocurrio un error al enviar los datos")
     })

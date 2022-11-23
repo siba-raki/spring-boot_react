@@ -24,10 +24,6 @@ function App() {
     getHoteles,
     setHoteles,
     hoteles,
-    valid,
-    setValid,
-    rol,
-    setRol
 } = Util();
 
   return (
@@ -36,7 +32,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={
-            <LoginRequired valid={valid}>
+            <LoginRequired >
               <React.Fragment>
                 <Filter />
                 <div className="flex mb-4">
@@ -46,9 +42,9 @@ function App() {
               </React.Fragment>
             </LoginRequired>
           } />
-          <Route path='login' element={<Login setValid={setValid} setRol={setRol}/>} />
+          <Route path='login' element={<Login />} />
           <Route path='dashboard' element={
-            <Dashboard valid={valid} rol={rol} >
+            <Dashboard >
               <Table hoteles={hoteles}/>
               <HoteleForm />
             </Dashboard>
