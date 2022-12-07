@@ -39,10 +39,7 @@ function Aside({hoteles, setHoteles}) {
   }
 
   const filtrarRating = (e) => {
-    console.log()
     setHoteles(hoteles.filter(h => h.rating >= e.target.value))
-
-    // llamar a la api y luego filtrar> o llamar con este filtro
   };
   return(
     <React.Fragment>
@@ -53,7 +50,6 @@ function Aside({hoteles, setHoteles}) {
               <h5>Rango de precio</h5>
               <br />
               <Slider
-                  // getAriaLabel={() => 'Temperature range'}
                   value={amount}
                   max={1000}
                   onChange={handleChangeAmount}

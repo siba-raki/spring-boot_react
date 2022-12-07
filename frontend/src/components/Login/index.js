@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,47 +9,38 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Snack from '../Snack';
+import axios from 'axios';
 
-function Login({setValid, setRol}) {
-    const [login, setLogin] = React.useState({name: "", password:""})
+function Login() {
+    const [snack, setSnack] = React.useState(false);
+
+    const nameRef = useRef()
+    const passwordRef = useRef()
+
     const navigate = useNavigate();
-
-
     const theme = createTheme();
 
-    const handleInputChange = e => {
-        const { name, value } = e.target;
-        setLogin(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
     const submitHandler = (e) => {
         if (e && "preventDefault" in e) e.preventDefault()
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": '*'},
-        //     body: JSON.stringify({'name': login['name'], 'password':login['password']})
-        // };
-        // fetch('/api/login', requestOptions)
-        // .then( res => {
-        //     if (res.ok){
-        //         return res.json()
-        //     }
-        //     throw res
-        // }).then(data => {
-            localStorage.setItem('valid', true)
-            // localStorage.setItem('rol', JSON.stringify(data.text))
-            localStorage.setItem('rol', 'admin')
-            navigate('/');
-        // }).catch(error => {
-        //     if (error.status === 401){
-        //         setSnack("Usuario o contraseña incorrecto")
-        //     }
-        // })
+        const data = {
+            user: nameRef.current.value,
+            password: passwordRef.current.value,
+        }
+        axios.get('http://localhost/login', data)
+            .then( response => {
+                if (response.status === 200){
+                    localStorage.setItem('valid', true)
+                    localStorage.setItem('rol', response.data)
+                    navigate('/');
+                } else {
+                    alert("Usuario y contraseña incorrectos")
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     
-    const [snack, setSnack] = React.useState(false);
     return(
         <React.Fragment>
             <Snack msg={snack} setMsg={setSnack} severity="error"/>
@@ -77,7 +68,7 @@ function Login({setValid, setRol}) {
                                 name="name"
                                 autoFocus
                                 type="text"
-                                onChange={handleInputChange}
+                                inputRef={nameRef}
                             />
                             <TextField
                                 margin="normal"
@@ -88,7 +79,7 @@ function Login({setValid, setRol}) {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
-                                onChange={handleInputChange}
+                                inputRef={passwordRef}
                                 />
                             <Button
                             type="submit"

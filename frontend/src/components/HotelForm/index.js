@@ -1,37 +1,29 @@
 import React from "react"
+import Snack  from "../Snack" 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function HoteleForm() {
-  const [newHotel, setNewHotel] = React.useState({titulo: "", descripcion: "", rating: 0, monto: 0})
+function HoteleForm({postHotel}) {
+  const [newHotel, setNewHotel] = React.useState({titulo: "", descripcion: "", rating: 0, amount: 0})
+  const [snack, setSnack] = React.useState(false);
   
   const updateState = (e) => {
     setNewHotel({
+        ...newHotel,
         [e.target.name]:e.target.value,
     });
   }
 
   const submitHandler = (e) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": '*'},
-        body: JSON.stringify(newHotel)
-    };
-    fetch('/api/login', requestOptions)
-    .then( res => {
-        if (res.ok){
-          return res.json()
-        }
-        throw res
-    }).then(data => {
-      
-    }).catch(error => {
-      alert("Ocurrio un error al enviar los datos")
-    })
+    if (e && "preventDefault" in e) e.preventDefault()
+    const isCreated = postHotel(newHotel)
+    setSnack( isCreated? "Se creo el hotel": "Error al crear el hotel")
   }
+
   return (
     <React.Fragment>
+    <Snack msg={snack} setMsg={setSnack}/>
     <Box
       component="form"
       sx={{

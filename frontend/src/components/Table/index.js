@@ -1,25 +1,19 @@
 import React from "react"
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Snack  from "../Snack" 
 
-function Table({ hoteles }) {
-  const deleteHotel = (value) => {
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": '*'},
-  };
-  fetch(`/api/login?id=${value}`, requestOptions)
-  .then( res => {
-      if (res.ok){
-        // get all?
-      }
-      throw res
-  }).catch(error => {
-    alert("Ocurrio un error al enviar los datos")
-  })
+function Table({ hoteles, deleteHotel }) {
+  const [snack, setSnack] = React.useState(false);
+
+  const handleClick = (e) => {
+    const isDeleted = deleteHotel(e.target.value)
+    setSnack(
+      isDeleted ? "Se elimino el hotel": "Error al eliminar el hotel"
+    )
   }
+
   return(
     <React.Fragment>
+      <Snack msg={snack} setMsg={setSnack}/>
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -67,9 +61,9 @@ function Table({ hoteles }) {
                             {value.amount}
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              <IconButton aria-label="delete" size="small" onClick={deleteHotel} value={value.id}>
-                                <DeleteIcon fontSize="inherit" />
-                              </IconButton>
+                              <button aria-label="delete" size="small" onClick={handleClick} value={value.id}>
+                                eliminar
+                              </button>
                           </td>
                         </tr>
                 )})}
