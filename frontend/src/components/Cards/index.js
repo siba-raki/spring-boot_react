@@ -16,12 +16,11 @@ function Cards({hoteles}) {
                     <h5 className="flex-auto card-title text-lg text-slate-900">
                       {hotel.titulo}
                       <p class="text-sm text-gray-600 flex items-left">
-                        {hotel.ciudad}, habitaciones: {hotel.nroHabitaciones}
+                        {hotel.ciudad}, Opiniones: {hotel.opiniones}
                       </p>
                     </h5>
                     <div className="text-lg font-semibold text-slate-500">
                       <Rating name="read-only" value={hotel.rating} readOnly precision={0.5}/>
-                        <p>{hotel.amount}$</p>
                     </div>
                       <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
                         <p>{hotel.descripcion}</p>

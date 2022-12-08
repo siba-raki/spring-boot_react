@@ -26,8 +26,7 @@ function Util() {
             descripcion:"El Dazzler by Wyndham Asuncion cuenta ofrece WiFi gratuita, piscina exterior abierta todo el año y centro de spa. También alberga un bar. prime location, safe neighborhood.",
             src: "",
             rating: 4.5,
-            amount: 80,
-            nroHabitaciones: 2,
+            opiniones: 200,
             ciudad: "ciudad del este"
             
         },
@@ -37,8 +36,7 @@ function Util() {
             descripcion:"El ibis Asuncion se encuentra en Asunción, a 3,5 km del zoológico y del jardín botánico y a 5 km del centro de información de las Naciones Unidas,",
             src: "",
             rating: 3.5,
-            amount: 70,
-            nroHabitaciones: 1,
+            opiniones: 100,
             ciudad: "ciudad del este"
         },
         {
@@ -47,8 +45,7 @@ function Util() {
             descripcion:"El Nomada Hotel & Hostel se encuentra en pleno centro de Asunción, a solo cinco minutos en coche de Panteón Nacional de los Héroes y Museo de la Casa de la Independencia. Tendrás tintorería, atención multilingüe y consigna de equipaje a tu disposición. Pagando un pequeño",
             src: "",
             rating: 5,
-            amount: 100,
-            nroHabitaciones: 3,
+            opiniones: 300,
             ciudad: "Caaguazu"
         },
         {
@@ -57,8 +54,7 @@ function Util() {
             descripcion:"Si decides alojarte en Las Lomas Casa Hotel de Asunción, estarás en el barrio financiero y a apenas diez minutos a pie de Centro comercial Paseo La Galería y Museo de Arcilla. Tendrás un centro de negocios, periódicos gratuitos en el vestíbulo y tintorería a tu disposición.",
             src: "",
             rating: 3,
-            amount: 25,
-            nroHabitaciones: 1,
+            opiniones: 100,
             ciudad: "asuncion"
         },
         {
@@ -67,8 +63,7 @@ function Util() {
             descripcion:"Si decides alojarte en Paramanta Lifestyle Hotel de Asunción, estarás en el barrio financiero, a solo 5 minutos en coche de Centro comercial Shopping del Sol y Parque Ñu Guazú. ",
             src: "",
             rating: 5,
-            amount: 100,
-            nroHabitaciones: 1,
+            opiniones: 100,
             ciudad: "asuncion"
         },
         {
@@ -77,8 +72,7 @@ function Util() {
             descripcion:"Si decides alojarte en Las Lomas Casa Hotel de Asunción, estarás en el barrio financiero y a apenas diez minutos a pie de Centro comercial Paseo La Galería y Museo de Arcilla. Tendrás un centro de negocios, periódicos gratuitos en el vestíbulo y tintorería a tu disposición.",
             src: "",
             rating: 4,
-            amount: 50,
-            nroHabitaciones: 1,
+            opiniones: 100,
             ciudad: "asuncion"
         },
         {
@@ -87,8 +81,7 @@ function Util() {
             descripcion:"Si decides alojarte en Danieri Asunción Hotel, estarás a menos de diez minutos a pie de Centro comercial Villa Morra y Centro comercial Shopping Mariscal.",
             src: "",
             rating: 4,
-            amount: 70,
-            nroHabitaciones: 2,
+            opiniones: 200,
             ciudad: "asuncion"
         },
         {
@@ -97,8 +90,7 @@ function Util() {
             descripcion:"Si decides alojarte en ibis AsuncionHotel Amalfi, estarás a menos de diez minutos a pie de Centro comercial Villa Morra y Centro comercial Shopping Mariscal.",
             src: "",
             rating: 2,
-            amount: 40,
-            nroHabitaciones: 2,
+            opiniones: 200,
             ciudad: "asuncion"
         },
         {
@@ -107,8 +99,7 @@ function Util() {
             descripcion:"estarás a menos de diez minutos a pie de Centro comercial Villa Morra y Centro comercial Shopping Mariscal.",
             src: "",
             rating: 2,
-            amount: 88,
-            nroHabitaciones: 2,
+            opiniones: 200,
             ciudad: "asuncion"
         }
         ])
