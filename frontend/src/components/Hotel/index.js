@@ -17,7 +17,24 @@ function Hotel() {
         ...prevState,
         [name]: value
     }));
-};
+  };
+
+  const agendar = () => {
+    const data = {
+      desde: fechas.desde,
+      hasta: fechas.hasta,
+      cliente: localStorage.getItem('user')
+    }
+    axios.post("http://localhost:8080/agendar", data)
+      .then(response => {
+        if (response.status === 201){
+          alert("agendamiento creado")
+        } else {
+          alert("Error al tratar de agendarse")
+        }
+      })
+      .catch(err => console.error(err))
+  }
 
 
   useEffect(() => {
@@ -86,13 +103,11 @@ function Hotel() {
                     </Grid>
                   </Grid>
                 </div>
-                <div className='pt-5'>
                 <TextField
                     name="desde"
                     label="Desde"
                     InputLabelProps={{ shrink: true, required: true }}
                     type="date"
-                    variant="standard"
                     onChange={handleInputChange}
                 />
                 <div className='inline pl-5'>
@@ -101,14 +116,11 @@ function Hotel() {
                     label="Hasta"
                     InputLabelProps={{ shrink: true, required: true }}
                     type="date"
-                    variant="standard"
                     onChange={handleInputChange}
                     />
-                    </div>
-
                 </div>
                 <div className='pt-4'>
-                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={agendar} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Agendar
                   </button>
                 </div>

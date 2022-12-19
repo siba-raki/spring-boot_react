@@ -22,23 +22,24 @@ function Login() {
 
     const submitHandler = (e) => {
         if (e && "preventDefault" in e) e.preventDefault()
-        const data = {
-            user: nameRef.current.value,
-            password: passwordRef.current.value,
-        }
-        axios.get('http://localhost/login', data)
-            .then( response => {
-                if (response.status === 200){
+        // const data = {
+            // user: nameRef.current.value,
+            // password: passwordRef.current.value,
+        // }
+        // axios.get('http://localhost/login', data)
+            // .then( response => {
+                // if (response.status === 200){
                     localStorage.setItem('valid', true)
+                    localStorage.setItem('user', 'usuario')
                     localStorage.setItem('rol', response.data)
                     navigate('/');
-                } else {
-                    alert("Usuario y contraseña incorrectos")
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
+                // } else {
+                    // alert("Usuario y contraseña incorrectos")
+                // }
+            // })
+            // .catch(err => {
+                // console.log(err)
+            // })
     }
     
     return(
