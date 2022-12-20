@@ -8,7 +8,7 @@ import { Util } from "../Util"
 import { Aside } from '../Aside';
 import { Login } from '../Login';
 import { LoginRequired } from '../LoginRequired';
-import { Table } from '../Table';
+import { CustomTable } from '../CustomTable';
 import { Hotel } from '../Hotel';
 
 import {
@@ -48,8 +48,8 @@ function App() {
           <Route path='hotel/:id' element={<Hotel />} />
           <Route path='dashboard' element={
             <Dashboard >
-              <Table hoteles={hoteles} getHoteles={getHoteles} setHoteles={setHoteles}/>
-              <HoteleForm hoteles={hoteles} getHoteles={getHoteles}/>
+              <CustomTable hoteles={hoteles} getHoteles={getHoteles} setHoteles={setHoteles}/>
+              <HoteleForm hoteles={hoteles} getHoteles={getHoteles} ciudades={ciudades}/>
             </Dashboard>
           } />
         </Routes>

@@ -19,13 +19,15 @@ function Hotel() {
     }));
   };
 
-  const agendar = () => {
+  const agendar = ( id ) => {
+    // que el path de reserva solo sea /reserva 
     const data = {
       desde: fechas.desde,
       hasta: fechas.hasta,
-      cliente: localStorage.getItem('user')
+      cliente_id: localStorage.getItem('userId'),
+      idHabitacion: id
     }
-    axios.post("http://localhost:8080/agendar", data)
+    axios.post("http://localhost:8080/reserva", data)
       .then(response => {
         if (response.status === 201){
           alert("agendamiento creado")
@@ -38,46 +40,16 @@ function Hotel() {
 
 
   useEffect(() => {
-    console.log(habitaciones.length)
     if (habitaciones.length === 0 ){
-      setHabitaciones([
-        {
-          id:1,
-          cantCamas: 1,
-          cantHuespedes: 2,
-          precio: 20,
-          tipo_habitacion: "habitacion 1"
-        },
-        {
-          id:2,
-          cantCamas: 2,
-          cantHuespedes: 2,
-          precio: 50,
-          tipo_habitacion: "habitacion 2"
-        },
-        {
-          id:3,
-          cantCamas: 1,
-          cantHuespedes: 1,
-          precio: 15,
-          tipo_habitacion: "habitacion 3"
-        },
-        {
-          id:4,
-          cantCamas: 2,
-          cantHuespedes: 4,
-          precio: 80,
-          tipo_habitacion: "habitacion 4"
-        },
-      ])
-      // axios.get(`http://localhost:8080/hoteles?id=${id}`)
-      //   .then(response => {
-      //     if (response.status === 200){
-      //       setHabitaciones(response.data)
-      //     }
-      //   })
+      axios.get(`http://localhost:8080/habitacion/hotel/${id}`)
+        .then(response => {
+          if (response.status === 200){
+            setHabitaciones(response.data)
+          }
+        })
     }
   }, [])
+
 
   return(
     <React.Fragment>
@@ -90,7 +62,7 @@ function Hotel() {
                   <Grid  rid container alignItems="center">
                     <Grid item xs>
                       <Typography gutterBottom variant="h4" component="div">
-                        {habitacion.tipo_habitacion}
+                        {habitacion.tipoHabitacion} {habitacion.numHabitacion}
                       </Typography>
                       <p color="text.secondary" variant="body2">
                         Huespedes: {habitacion.cantHuespedes}, Camas: {habitacion.cantCamas}
@@ -120,7 +92,7 @@ function Hotel() {
                     />
                 </div>
                 <div className='pt-4'>
-                  <button onClick={agendar} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={() => agendar(habitacion.idHabitacion)} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Agendar
                   </button>
                 </div>

@@ -3,12 +3,18 @@ import Snack  from "../Snack"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-function HoteleForm({postHotel}) {
-  const [newHotel, setNewHotel] = React.useState({titulo: "", descripcion: "", rating: 0, amount: 0})
+function HoteleForm({postHotel, ciudades}) {
+  const [newHotel, setNewHotel] = React.useState({titulo: "", descripcion: "", direccion: "", ciudad: 0, telefono: ""})
   const [snack, setSnack] = React.useState(false);
-  
+
   const updateState = (e) => {
+    console.log(e.target.name)
+    console.log(e.target.value)
     setNewHotel({
         ...newHotel,
         [e.target.name]:e.target.value,
@@ -17,6 +23,7 @@ function HoteleForm({postHotel}) {
 
   const submitHandler = (e) => {
     if (e && "preventDefault" in e) e.preventDefault()
+    console.log(newHotel)
     const isCreated = postHotel(newHotel)
     setSnack( isCreated? "Se creo el hotel": "Error al crear el hotel")
   }
@@ -33,42 +40,56 @@ function HoteleForm({postHotel}) {
       noValidate
       autoComplete="off"
     >
-      <div>
+      <div className="flex items-center justify-center px-2">
         <TextField
-          label="Titulo"
+          label="Hotel"
           variant="standard"
-          style = {{width: 300}}
-          name = "titulo"
+          name = "nombreHotel"
           onChange={updateState}
           required
         />
         <TextField
           label="Descripcion"
           variant="standard"
-          style = {{width: 1200}}
+          multiline
           name = "descripcion"
+          style = {{width: '50%'}}
           onChange={updateState}
           required
         />
         <TextField
-          label="calificacion"
+          label="Direccion"
           variant="standard"
-          type="number"
-          style = {{width: 100}}
-          name = "rating"
+          name = "direccion"
           onChange={updateState}
           required
         />
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-standard-label">Ciudad</InputLabel>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={newHotel.ciudad}
+            name={"ciudad"}
+            onChange={updateState}
+            label="Ciudad"
+            defaultValue={0}
+          >
+            {ciudades.map((ciudad) => {
+              return (
+                <MenuItem name={"ciudad"} value={ciudad.idCiudad}>{ciudad.ciudad}</MenuItem>
+              )
+            })}
+          </Select>
+        </FormControl>
         <TextField
-          label="monto"
-          type="number"
+          label="Telefono"
           variant="standard"
-          style = {{width: 100}}
-          name = "amount"
+          name = "telefono"
           onChange={updateState}
           required
         />
-            <Button type="submit"  variant="contained" className="mt-3">Añadir</Button>
+        <Button type="submit"  variant="contained" className="mt-3">Añadir</Button>
       </div>
     </Box>
 

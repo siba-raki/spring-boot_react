@@ -30,8 +30,9 @@ function Login() {
             // .then( response => {
                 // if (response.status === 200){
                     localStorage.setItem('valid', true)
-                    localStorage.setItem('user', 'usuario')
-                    localStorage.setItem('rol', response.data)
+                    localStorage.setItem('userId', 1) // su id nomas
+                    localStorage.setItem('rol', 'admin')
+                    // localStorage.setItem('rol', response.data)
                     navigate('/');
                 // } else {
                     // alert("Usuario y contraseña incorrectos")

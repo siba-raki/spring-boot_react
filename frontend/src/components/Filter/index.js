@@ -56,7 +56,7 @@ function Filter( {ciudades, hoteles, setHoteles}) {
                 {
                   ciudades.map((ciudad) => {
                     return(
-                      <option>{ciudad}</option>
+                      <option>{ciudad.ciudad}</option>
                     )
                   })
                 }

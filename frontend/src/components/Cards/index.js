@@ -9,24 +9,25 @@ function Cards({hoteles}) {
             return(
               <div className="flex font-sans border-solid border-2 rounded shadow shadow-indigo-500/40 my-5">
                 <div className="flex-none w-48 relative">
-                  <img src={hotel.src} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <img src={hotel.foto || ''} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                 </div>
                 <div className="flex-auto p-6">
                   <div className="flex flex-wrap">
                     <h5 className="flex-auto card-title text-lg text-slate-900">
-                      {hotel.titulo}
+                      {hotel.nombreHotel}
                       <p class="text-sm text-gray-600 flex items-left">
-                        {hotel.ciudad}, Opiniones: {hotel.opiniones}
+                        {hotel.ciudad}, Opiniones: {hotel.opiniones || 100}
                       </p>
                     </h5>
                     <div className="text-lg font-semibold text-slate-500">
-                      <Rating name="read-only" value={hotel.rating} readOnly precision={0.5}/>
+                      <Rating name="read-only" value={hotel.rating || 0} readOnly precision={0.5}/>
                     </div>
                       <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
                         <p>{hotel.descripcion}</p>
+                        <p>Telefono: {hotel.telefono}</p>
                       </div>
                     </div>
-                      <a href={`/hotel/${hotel.id}`} className="btn btn-primary float-end">Ver disponibilidad</a>
+                      <a href={`/hotel/${hotel.idHotel}`} className="btn btn-primary float-end">Ver disponibilidad</a>
                     </div>
                   </div>
                 )
