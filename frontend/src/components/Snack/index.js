@@ -5,7 +5,7 @@ const Snack = ({msg, setMsg, severity='info'}) => {
     return (
         <Snackbar
             open={msg}
-            autoHideDuration={2000}
+            autoHideDuration={3000}
             anchorOrigin={{vertical: 'top', 'horizontal': 'center'}}
             variant=""
             onClose={(e, reason) => {

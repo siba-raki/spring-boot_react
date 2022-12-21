@@ -28,10 +28,10 @@ function HoteleForm({postHotel, updateHotel, ciudades, hoteles}) {
   }
 
   const updateCiudad = (e) => {
-    const ciudad = ciudades.filter(ciudad => ciudad.idCiudad == e.target.value)
+    const ciudad = ciudades.filter(ciudad => ciudad.idCiudad === e.target.value)
     setOldHotel({
       ...oldHotel,
-      ["ciudad"]:ciudad[0],
+      "ciudad":ciudad[0],
     });
     }
   

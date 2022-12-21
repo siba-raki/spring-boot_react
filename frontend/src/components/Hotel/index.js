@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom'
-import React, { useEffect, useState} from 'react';
-import axios from 'axios';
+import React, { useEffect} from 'react';
 
+import Snack  from "../Snack" 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
-function Hotel() {
+function Hotel({ getHabitaciones, habitaciones, reservar }) {
   const { id } = useParams();
-  const [habitaciones, setHabitaciones] = useState([]);
   const [fechas, setFechas] = React.useState({desde: null, hasta: null});
+  const [snack, setSnack] = React.useState(false);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -19,40 +19,42 @@ function Hotel() {
     }));
   };
 
-  const agendar = ( id ) => {
-    // que el path de reserva solo sea /reserva 
+  const agendar = ( idHabitacion ) => {
+    const now = new Date();
     const data = {
-      desde: fechas.desde,
-      hasta: fechas.hasta,
-      cliente_id: localStorage.getItem('userId'),
-      idHabitacion: id
+      hotel: id,
+      usuario: localStorage.getItem('userId'),
+      habitacion: idHabitacion,
+      reservaDesde: fechas.desde,
+      reservaHasta: fechas.hasta,
+      estado: "Reservado"
     }
-    axios.post("http://localhost:8080/reserva", data)
-      .then(response => {
-        if (response.status === 201){
-          alert("agendamiento creado")
-        } else {
-          alert("Error al tratar de agendarse")
-        }
-      })
-      .catch(err => console.error(err))
+    if ( data.reservaDesde > data.reservaHasta ) {
+      setSnack("Fecha invalida para reservar");
+      return
+    }
+    if ( data.reservaHasta <  now.toISOString().split('T')[0]) {
+      setSnack("La fecha 'hasta' es menor a la fecha actual");
+      return
+    }
+    const reservado = reservar(data)
+    setSnack(
+      reservado ? "Se creo la reserva": "Error al crear la reserva"
+    )
   }
 
 
   useEffect(() => {
     if (habitaciones.length === 0 ){
-      axios.get(`http://localhost:8080/habitacion/hotel/${id}`)
-        .then(response => {
-          if (response.status === 200){
-            setHabitaciones(response.data)
-          }
-        })
+      getHabitaciones(id)
     }
+  // eslint-disable-next-line
   }, [])
 
 
   return(
     <React.Fragment>
+      <Snack msg={snack} setMsg={setSnack}/>      
       { habitaciones.length > 0 && Object.entries(habitaciones).map(([index, habitacion]) => {
         return(
           <div className="max-w-4xl mx-auto">
@@ -93,7 +95,7 @@ function Hotel() {
                 </div>
                 <div className='pt-4'>
                   <button onClick={() => agendar(habitacion.idHabitacion)} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Agendar
+                    Reservar
                   </button>
                 </div>
               </div>

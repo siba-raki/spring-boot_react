@@ -23,11 +23,14 @@ import { Dashboard } from '../Dashboard';
 function App() {
   const {
     setHoteles,
+    getHabitaciones,
+    reservar,
     postHotel,
     updateHotel,
     deleteHotel,
     hoteles,
-    ciudades
+    ciudades,
+    habitaciones
 } = Util();
 
   return (
@@ -47,7 +50,7 @@ function App() {
             </LoginRequired>
           } />
           <Route path='login' element={<Login />} />
-          <Route path='hotel/:id' element={<Hotel />} />
+          <Route path='hotel/:id' element={<Hotel getHabitaciones={getHabitaciones} habitaciones={habitaciones} reservar={reservar} />} />
           <Route path='dashboard' element={
             <Dashboard >
               <CustomTableHoteles hoteles={hoteles} deleteHotel={deleteHotel}/>

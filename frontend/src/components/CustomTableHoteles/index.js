@@ -15,14 +15,15 @@ function CustomTableHoteles({ hoteles, deleteHotel }) {
     const isDeleted = deleteHotel(e.target.value)
     setSnack(
       isDeleted ? "Se elimino el hotel": "Error al eliminar el hotel"
-    )
-  }
-  
-
-  return(
-    <React.Fragment>
+      )
+    }
+    
+    
+    return(
+      <React.Fragment>
       <Snack msg={snack} setMsg={setSnack}/>      
     <TableContainer component={Paper}>
+
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -39,7 +40,7 @@ function CustomTableHoteles({ hoteles, deleteHotel }) {
             <TableRow
               key={hotel.idHotel}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+              >
               <TableCell component="th" scope="row">{hotel.nombreHotel}</TableCell>
               <TableCell>{hotel.descripcion}</TableCell>
               <TableCell>{hotel.direccion}</TableCell>
