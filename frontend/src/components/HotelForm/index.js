@@ -29,7 +29,6 @@ function HoteleForm({postHotel, updateHotel, ciudades, hoteles}) {
 
   const createHotel = (e) => {
     if (e && "preventDefault" in e) e.preventDefault()
-    console.log(newHotel)
     const isCreated = postHotel(newHotel)
     setSnack( isCreated? "Se creo el hotel": "Error al crear el hotel")
   }

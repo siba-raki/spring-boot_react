@@ -5,77 +5,75 @@ function Util() {
     const [hoteles, setHoteles] = useState([]);
     const [ciudades, setCiudades] = useState([])
 
-    const getHoteles = () => {
-        axios.get('http://localhost:8080/hotel')
-            .then(response => {
-                if (response.status === 200){
-                    setHoteles(response.data);
-                } else {
-                    alert("Error a traer datos del servidor")
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
-    }
-
-    const postHotel = (data) => {
-        axios.post('http://localhost:8080/hotel', data)
-            .then(response => {
-                if (response.status === 200){
-                    getHoteles()
-                    return true
-                } else {
-                    return false
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
+    const getHoteles = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/hotel");
+            if (response.status === 200){
+                setHoteles(response.data);
+            } else {
+                alert("Error a traer datos del servidor")
+            }
+        } catch (error) {
+            console.error(error);
         }
-        
-    const deleteHotel = (id) => {
-        axios.delete('http://localhost:8080/hotel', id)
-            .then(response => {
-                if (response.status === 200 ){
-                    getHoteles()
-                    return true;
-                } else {
-                    return false;
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
     }
 
-    const updateHotel = (hotel) => {
-        axios.update('http://localhost:8080/hotel', hotel)
-            .then(response => {
-                if (response.status === 200 ){
-                    getHoteles()
-                    return true;
-                } else {
-                    return false;
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
+    const postHotel = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:8080/hotel', data);
+            if (response.status === 200){
+                getHoteles()
+                return true
+            } else {
+                return false
+            }
+            
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const getCiudades = () => {
-        axios.get('http://localhost:8080/ciudad')
-            .then(response => {
-                if (response.status === 200 ){
-                    setCiudades(response.data);
-                } else {
-                    alert("error al traer datos del servidor")
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
+    const deleteHotel = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:8080/hotel/eliminar/${id}`);
+            if (response.status === 200 ){
+                getHoteles()
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
+    const updateHotel = async (hotel) => {
+        try {
+            const response = await axios.put(
+                'http://localhost:8080/hotel', hotel
+            )
+            if (response.status === 200 ){
+                getHoteles()
+                return true;
+            } else {
+                return false;
+            }        
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const getCiudades = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/ciudad');
+            if (response.status === 200 ){
+                setCiudades(response.data);
+            } else {
+                alert("error al traer datos del servidor")
+            }
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     useEffect(() => {
