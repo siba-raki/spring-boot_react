@@ -24,43 +24,39 @@ function Util() {
             if (response.status === 200){
                 getHoteles()
                 return true
-            } else {
-                return false
             }
-            
         } catch (error) {
             console.error(error);
         }
+        return false
     }
 
     const deleteHotel = async (id) => {
         try {
             const response = await axios.delete(`http://localhost:8080/hotel/eliminar/${id}`);
+            console.log(response.status);
+
             if (response.status === 200 ){
                 getHoteles()
                 return true;
-            } else {
-                return false;
             }
         } catch (error) {
             console.error(error)
         }
+        return false;
     };
 
     const updateHotel = async (hotel) => {
         try {
-            const response = await axios.put(
-                'http://localhost:8080/hotel', hotel
-            )
+            const response = await axios.put('http://localhost:8080/hotel', hotel)
             if (response.status === 200 ){
                 getHoteles()
                 return true;
-            } else {
-                return false;
-            }        
+            } 
         } catch (error) {
             console.error(error)
         }
+        return false;
     }
 
     const getCiudades = async () => {

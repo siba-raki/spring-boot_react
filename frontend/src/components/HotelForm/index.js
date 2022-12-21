@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 
 function HoteleForm({postHotel, updateHotel, ciudades, hoteles}) {
   const [newHotel, setNewHotel] = React.useState({nombreHotel: "", descripcion: "", direccion: "", ciudad: 0, telefono: ""})
-  const [oldHotel, setOldHotel] = React.useState({idHotel: 0, nombreHotel: "", descripcion: "", direccion: "", ciudad: 0, telefono: ""})
+  const [oldHotel, setOldHotel] = React.useState({idHotel: 0, nombreHotel: "", descripcion: "", direccion: "", ciudad: {ciudad: "", id: 0}, telefono: ""})
   const [snack, setSnack] = React.useState(false);
 
   const updateStateNewHotel = (e) => {
@@ -27,6 +27,14 @@ function HoteleForm({postHotel, updateHotel, ciudades, hoteles}) {
     });
   }
 
+  const updateCiudad = (e) => {
+    const ciudad = ciudades.filter(ciudad => ciudad.idCiudad == e.target.value)
+    setOldHotel({
+      ...oldHotel,
+      ["ciudad"]:ciudad[0],
+    });
+    }
+  
   const createHotel = (e) => {
     if (e && "preventDefault" in e) e.preventDefault()
     const isCreated = postHotel(newHotel)
@@ -161,9 +169,8 @@ function HoteleForm({postHotel, updateHotel, ciudades, hoteles}) {
             <Select
               labelId="slect-label-update"
               id="select-standard-update"
-              value={oldHotel.ciudad}
               name="ciudad"
-              onChange={updateStateUpdateHotel}
+              onChange={updateCiudad}
               label="Ciudad"
               defaultValue={''}
             >
