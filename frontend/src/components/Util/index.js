@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react"
 
 function Util() {
-    // const [loading, setLoading] = useState(false);
     const [hoteles, setHoteles] = useState([]);
     const [ciudades, setCiudades] = useState([])
 
@@ -21,9 +20,9 @@ function Util() {
     }
 
     const postHotel = (data) => {
-        axios.post('http://localhost:8080/hoteles', data)
+        axios.post('http://localhost:8080/hotel', data)
             .then(response => {
-                if (response.status === 201){
+                if (response.status === 200){
                     getHoteles()
                     return true
                 } else {
@@ -33,12 +32,28 @@ function Util() {
             .catch(err => {
                 console.error(err);
             });
+        }
+        
+    const deleteHotel = (id) => {
+        axios.delete('http://localhost:8080/hotel', id)
+            .then(response => {
+                if (response.status === 200 ){
+                    getHoteles()
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
     }
 
-    const deleteHotel = (id) => {
-        axios.delete('http://localhost:8080/hoteles', id)
+    const updateHotel = (hotel) => {
+        axios.update('http://localhost:8080/hotel', hotel)
             .then(response => {
-                if (response.status === 202 ){
+                if (response.status === 200 ){
+                    getHoteles()
                     return true;
                 } else {
                     return false;
@@ -75,6 +90,7 @@ function Util() {
         getHoteles,
         setHoteles,
         postHotel,
+        updateHotel,
         deleteHotel,
         hoteles,
         ciudades

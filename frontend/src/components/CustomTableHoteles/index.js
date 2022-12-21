@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function CustomTable({ hoteles, deleteHotel }) {
+function CustomTableHoteles({ hoteles, deleteHotel }) {
   const [snack, setSnack] = React.useState(false);
 
   const handleClick = (e) => {
@@ -59,4 +59,4 @@ function CustomTable({ hoteles, deleteHotel }) {
   )
 }
 
-export { CustomTable }  
+export { CustomTableHoteles }  
