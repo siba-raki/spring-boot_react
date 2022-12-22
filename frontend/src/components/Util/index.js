@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 function Util() {
     const [hoteles, setHoteles] = useState([]);
     const [ciudades, setCiudades] = useState([])
+    const [reservas, setReservas] = useState([])
     const [habitaciones, setHabitaciones] = useState([]);
 
     const getHoteles = async () => {
@@ -86,6 +87,19 @@ function Util() {
         }
     }
 
+    const getReservas = async ( id ) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/hotel/habitacion/hotel/${id}`)
+            if (response.status === 200 ){
+                setHabitaciones(response.data);
+            } else {
+                alert("error al traer datos del servidor")
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     const reservar = async ( data ) => {
         try {
             const response = await axios.post("http://localhost:8080/hotel/reserva", data)
@@ -129,6 +143,7 @@ function Util() {
         getHoteles,
         getLogin,
         setHoteles,
+        setHabitaciones,
         postHotel,
         updateHotel,
         deleteHotel,

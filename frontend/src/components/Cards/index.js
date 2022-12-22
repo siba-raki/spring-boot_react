@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import Rating from '@mui/material/Rating';
 function Cards({hoteles}) {
   return(
     <Fragment>
@@ -16,12 +15,9 @@ function Cards({hoteles}) {
                     <h5 className="flex-auto card-title text-lg text-slate-900">
                       {hotel.nombreHotel}
                       <p class="text-sm text-gray-600 flex items-left">
-                        {hotel.ciudad}, Opiniones: {hotel.opiniones || 100}
+                        {hotel.ciudad}
                       </p>
                     </h5>
-                    <div className="text-lg font-semibold text-slate-500">
-                      <Rating name="read-only" value={hotel.rating || 0} readOnly precision={0.5}/>
-                    </div>
                       <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
                         <p>{hotel.descripcion}</p>
                         <p>Telefono: {hotel.telefono}</p>

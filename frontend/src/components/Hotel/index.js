@@ -51,14 +51,21 @@ function Hotel({ getHabitaciones, habitaciones, reservar }) {
   // eslint-disable-next-line
   }, [])
 
-
+  const NoHabitacion = () => {
+    return (
+          <Typography variant="h4" gutterBottom>
+            No hay habitaciones disponibles :(
+          </Typography>
+    )
+  }
+  
   return(
     <React.Fragment>
-      <Snack msg={snack} setMsg={setSnack}/>      
+      <Snack msg={snack} setMsg={setSnack}/>  
+      <div className='grid grid-cols-3 gap-4 max-w-full'>
       { habitaciones.length > 0 && Object.entries(habitaciones).map(([index, habitacion]) => {
         return(
-          <div className="max-w-4xl mx-auto">
-            <div className="flex font-sans border-solid border-2 rounded shadow shadow-indigo-500/40 my-5">
+            <div className="font-sans border-solid border-2 rounded shadow shadow-indigo-500/40 my-5 w-full">
               <div className="flex-auto p-6">
                 <div className="flex flex-wrap">
                   <Grid  rid container alignItems="center">
@@ -100,9 +107,11 @@ function Hotel({ getHabitaciones, habitaciones, reservar }) {
                 </div>
               </div>
             </div>
-          </div>
         )
       })}
+        </div>    
+
+      {habitaciones.length === 0 && <NoHabitacion />}
     </React.Fragment>
   )
 }

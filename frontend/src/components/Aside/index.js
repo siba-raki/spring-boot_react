@@ -25,22 +25,19 @@ const StyledButton = styled(Button)(({ theme }) => ({
   ].join(','),
 }));
 
-function Aside({hoteles, setHoteles}) {
-  const [amount, setAmount] = React.useState([20, 300]);
+function Aside({habitaciones, setHabitaciones, getHabitaciones}) {
+  const [amount, setAmount] = React.useState([40000, 100000]);
 
   const handleChangeAmount = (event, newValue) => {
     setAmount(newValue);
   };
 
-  const filtrarAmount = () => {
-    let newHoteles = hoteles.filter(hotel => hotel.amount >= amount[0]);
-    newHoteles = newHoteles.filter(hotel => hotel.amount <= amount[1]);
-    setHoteles(newHoteles)
+  const filtrarAmount = async () => {
+    let newHabitaciones = habitaciones.filter(habitacion => habitacion.precio >= amount[0]);
+    newHabitaciones = newHabitaciones.filter(habitacion => habitacion.precio <= amount[1]);
+    setHabitaciones(newHabitaciones)
   }
 
-  const filtrarRating = (e) => {
-    setHoteles(hoteles.filter(h => h.rating >= e.target.value))
-  };
   return(
     <React.Fragment>
       <div className="w-1/3">
@@ -51,24 +48,12 @@ function Aside({hoteles, setHoteles}) {
               <br />
               <Slider
                   value={amount}
-                  max={1000}
+                  max={300000}
                   onChange={handleChangeAmount}
                   valueLabelDisplay="auto"
                   getAriaValueText={valuetext}
                   />
               <button type="button" className="mt-2 float-right btn btn-primary" onClick={filtrarAmount}>Filtrar</button>
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-end pt-5">
-          <div className="w-1/2">
-            <div className="px-4 py-4 mr-10 border-gray-200 shadow shadow-indigo-500/40">
-              <h5>Buscar por estrellas</h5>
-              <StyledButton onClick={filtrarRating} value={1} size="small" >+1 estrellas</StyledButton >
-              <StyledButton onClick={filtrarRating} value={2} size="small" >+2 estrellas</StyledButton >
-              <StyledButton onClick={filtrarRating} value={3} size="small" >+3 estrellas</StyledButton >
-              <StyledButton onClick={filtrarRating} value={4} size="small" >+4 estrellas</StyledButton >
-              <StyledButton onClick={filtrarRating} value={5} size="small" >5 estrellas</StyledButton >
             </div>
           </div>
         </div>

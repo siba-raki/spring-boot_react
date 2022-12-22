@@ -2,27 +2,18 @@ import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import React, {useRef, useState} from 'react';
 import HotelImg from "./hotel.jpg";
-// poner host/image.png y en la api pooner la imagenes en /public
 function Filter( {ciudades, hoteles, setHoteles}) {
     const tituloRef = useRef("")
-    const nroHabitacionesRef = useRef(0)
     const ciudadRef = useRef("")
-    const [clasificacion, setClasificacion] = useState(0)
 
     const submitHandler = (e) => {
       if (e && "preventDefault" in e) e.preventDefault()
       let newHoteles = hoteles
       if (tituloRef.current.value !== ""){
-        newHoteles = newHoteles.filter(hotel => hotel.titulo.includes(tituloRef.current.value));
-      }
-      if (nroHabitacionesRef.current.value !== "" && nroHabitacionesRef.current.value > 0){
-        newHoteles = newHoteles.filter(hotel => hotel.nroHabitaciones === nroHabitacionesRef.current.value);
+        newHoteles = newHoteles.filter(hotel => hotel.nombreHotel.includes(tituloRef.current.value));
       }
       if (ciudadRef.current.value !== ""){
         newHoteles = newHoteles.filter(hotel => hotel.ciudad === ciudadRef.current.value);
-      }
-      if (clasificacion !== 0){
-        newHoteles = newHoteles.filter(hotel => hotel.rating >= clasificacion);
       }
       setHoteles(newHoteles)
     }
@@ -40,12 +31,6 @@ function Filter( {ciudades, hoteles, setHoteles}) {
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Nro de habitaciones
-            </label>
-            <input name="nroHabitaciones" ref={nroHabitacionesRef} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white" type="number"/>
-          </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
             Ciudad
@@ -66,13 +51,7 @@ function Filter( {ciudades, hoteles, setHoteles}) {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Clasificacion
-            </label>
-            <Rating onChange={e => setClasificacion(e.target.value)} name="clasificacion" precision={0.5}/>
-            <Button type="submit" size="large" variant="contained" className="mt-5 btn btn-primary">Filtrar</Button>
-          </div>
+            <Button type="submit" size="large" variant="contained" className="mt-4 btn btn-primary">Filtrar</Button>
         </div>
       </form>
       </div>

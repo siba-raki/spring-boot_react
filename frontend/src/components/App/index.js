@@ -18,12 +18,15 @@ import {
 } from "react-router-dom"
 import { HoteleForm } from '../HotelForm';
 import { Dashboard } from '../Dashboard';
+import { Reservas } from '../Reservas';
 
 
 function App() {
   const {
     setHoteles,
     getHabitaciones,
+    setHabitaciones,
+    getReservas,
     reservar,
     postHotel,
     updateHotel,
@@ -43,15 +46,18 @@ function App() {
             <LoginRequired >
               <React.Fragment>
                 <Filter ciudades={ciudades} hoteles={hoteles} setHoteles={setHoteles}/>
-                <div className="flex mb-4">
-                  <Aside hoteles={hoteles} setHoteles={setHoteles}/>
-                  <Cards hoteles={hoteles}/>
-                </div>
+                <Cards hoteles={hoteles}/>
               </React.Fragment>
             </LoginRequired>
           } />
+          <Route path='reservas' element={<Reservas getReservas={getReservas}/>} />
           <Route path='login' element={<Login getLogin={getLogin}/>} />
-          <Route path='hotel/:id' element={<Hotel getHabitaciones={getHabitaciones} habitaciones={habitaciones} reservar={reservar} />} />
+          <Route path='hotel/:id' element={
+            <div className="flex  mb-4 w-full">
+              <Aside habitaciones={habitaciones} setHabitaciones={setHabitaciones} getHabitaciones={getHabitaciones}/>
+              <Hotel getHabitaciones={getHabitaciones} habitaciones={habitaciones} reservar={reservar} />
+            </div>
+          } />
           <Route path='dashboard' element={
             <Dashboard >
               <CustomTableHoteles hoteles={hoteles} deleteHotel={deleteHotel}/>
