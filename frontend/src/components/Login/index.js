@@ -9,9 +9,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Snack from '../Snack';
-import axios from 'axios';
 
-function Login() {
+function Login({ getLogin }) {
     const [snack, setSnack] = React.useState(false);
 
     const nameRef = useRef()
@@ -20,27 +19,18 @@ function Login() {
     const navigate = useNavigate();
     const theme = createTheme();
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         if (e && "preventDefault" in e) e.preventDefault()
-        // const data = {
-            // user: nameRef.current.value,
-            // password: passwordRef.current.value,
-        // }
-        // axios.get('http://localhost/login', data)
-            // .then( response => {
-                // if (response.status === 200){
-                    localStorage.setItem('valid', true)
-                    localStorage.setItem('userId', 1) // su id nomas
-                    localStorage.setItem('rol', 'admin')
-                    // localStorage.setItem('rol', response.data)
-                    navigate('/');
-                // } else {
-                    // alert("Usuario y contraseña incorrectos")
-                // }
-            // })
-            // .catch(err => {
-                // console.log(err)
-            // })
+        const data = {
+            user: nameRef.current.value,
+            password: passwordRef.current.value,
+        }
+        const isLoged = await getLogin(data);
+        if (isLoged) {
+            navigate('/');
+        } else {
+            setSnack("Usuario y contraseña incorrectos")
+        }
     }
     
     return(

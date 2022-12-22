@@ -98,6 +98,25 @@ function Util() {
         return false;
     }
 
+    const getLogin = async ( data ) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/usuario/login/${data.user}/${data.password}`)
+            if (response.status === 200){
+                const data = await response.data;
+                if (data){
+                    localStorage.setItem('valid', true)
+                    localStorage.setItem('userId', data[0].idUsuario)
+                    localStorage.setItem('rol', data[0].rol)
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.error(error)
+        }
+        return false;
+    }
+
+
     useEffect(() => {
         if (hoteles.length === 0){
             getHoteles()
@@ -108,6 +127,7 @@ function Util() {
 
     return{
         getHoteles,
+        getLogin,
         setHoteles,
         postHotel,
         updateHotel,

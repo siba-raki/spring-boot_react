@@ -30,7 +30,8 @@ function App() {
     deleteHotel,
     hoteles,
     ciudades,
-    habitaciones
+    habitaciones,
+    getLogin
 } = Util();
 
   return (
@@ -49,7 +50,7 @@ function App() {
               </React.Fragment>
             </LoginRequired>
           } />
-          <Route path='login' element={<Login />} />
+          <Route path='login' element={<Login getLogin={getLogin}/>} />
           <Route path='hotel/:id' element={<Hotel getHabitaciones={getHabitaciones} habitaciones={habitaciones} reservar={reservar} />} />
           <Route path='dashboard' element={
             <Dashboard >
